@@ -208,9 +208,9 @@ def load_data(filename="addressbook.pkl"):
         return AddressBook()
     
 @input_error
-def show_birthday(args, book):
+def show_birthday(args, adress_book):
     name = args[0]
-    record = book.find(name)
+    record = adress_book.find(name)
     return str(record.birthday)
 
 
@@ -256,6 +256,7 @@ def main():
             print(birthdays(args, address_book))
         else:
             print("Invalid command.")
+        save_data(address_book)
     
 if __name__ == "__main__":
     main()
