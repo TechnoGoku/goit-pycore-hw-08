@@ -196,6 +196,17 @@ def add_birthday(args, address_book):
     else:
         raise KeyError
     
+def save_data(adress_book, filename="addressbook.pkl"):
+    with open(filename, "wb") as f:
+        pickle.dump(adress_book, f)
+
+def load_data(filename="addressbook.pkl"):
+    try:
+        with open(filename, "rb") as f:
+            return pickle.load(f)
+    except FileNotFoundError:
+        return AddressBook()
+    
 @input_error
 def show_birthday(args, book):
     name = args[0]
@@ -218,7 +229,7 @@ def birthdays(args, address_book):
     
 
 def main():
-    address_book = AddressBook()
+    address_book = load_data()
     print("Welcome to the assistant bot!")
     while True:
         user_input = input("Enter a command: ")
